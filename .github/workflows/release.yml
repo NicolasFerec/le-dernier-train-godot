@@ -34,7 +34,7 @@ jobs:
       - name: Install GodotSteam
         run: |
           curl -fsSL --retry 3 https://codeberg.org/godotsteam/godotsteam/releases/download/v4.24-gde/godotsteam-4.24-gdextension-plugin-4.4.zip -o "$RUNNER_TEMP/steam.zip"
-          echo "7142662c9eb5007ce6cb3b28027fb75480ecf0013f61b104afae0f779d7c026c  $RUNNER_TEMP/steam.zip" | sha256sum -c -
+          echo "d4358888959a03f4df0c71aafbcdca8f34b8cb9d4522aa5c8454f0e9e3debbf7  $RUNNER_TEMP/steam.zip" | sha256sum -c -
           unzip -q "$RUNNER_TEMP/steam.zip" 'addons/godotsteam/godotsteam.gdextension' 'addons/godotsteam/license.md' 'addons/godotsteam/linux64/*' 'addons/godotsteam/win64/*'
       - name: Package Windows and Linux
         run: |
