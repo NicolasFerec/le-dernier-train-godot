@@ -51,8 +51,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          previous=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)
-          gh release create "$GITHUB_REF_NAME" "$RUNNER_TEMP/release/"* --verify-tag --generate-notes --notes-start-tag "$previous" --draft
+          previous=$(gh release list --repo "$GITHUB_REPOSITORY" --exclude-drafts --exclude-pre-releases --limit 100 \
+            --json isLatest,tagName --jq '.[] | select(.isLatest) | .tagName')
+          notes_from=()
+          if [[ -n "$previous" ]]; then
+            notes_from=(--notes-start-tag "$previous")
+          fi
+          gh release create "$GITHUB_REF_NAME" "$RUNNER_TEMP/release/"* --verify-tag --generate-notes "${notes_from[@]}" --draft
           gh release edit "$GITHUB_REF_NAME" --draft=false --latest
       - name: Update rolling Dev prerelease
         if: github.event_name == 'push'

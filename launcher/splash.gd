@@ -1,6 +1,6 @@
 extends Control
 
-const RELEASE_ROOT := "https://github.com/NicolasFerec/le-dernier-train/releases/"
+const RELEASE_ROOT := "https://github.com/NicolasFerec/le-dernier-train-godot/releases/"
 const GAME_DATA := "user://../Le Dernier Train"
 const PREFERENCES := GAME_DATA + "/preferences.cfg"
 const LEGACY_GAME_DATA := "user://../Arène coop"
